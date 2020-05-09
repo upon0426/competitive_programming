@@ -5,19 +5,25 @@ typedef long long ll;
 
 int main(void)
 {
+    // input
     int n,m,c;
     cin >> n >> m >> c;
     vector<int> b(m);
     rep(i, m) cin >> b[i];
     int answer = 0;
+    vector<vector<int>> a(n, vector<int>(m));
     rep(i, n) {
-        vector<int> a(m);
-        rep(j, m) cin >> a[j];
-        int total = 0;
-        rep(j, m) {
-            total += a[j] * b[j];
-        }
-        if (total + c > 0) answer++;
+        rep(j, m) cin >> a[i][j];
     }
+
+    // compute
+    int total;
+    rep(i, n) {
+        total = 0;
+        rep(j, m) total += b[j] * a[i][j];
+        if (total + c > 0) answer++;    
+    }
+
+    // output
     cout << answer << endl;
  }
