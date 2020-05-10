@@ -5,4 +5,10 @@ typedef long long ll;
 
 int main(void)
 {
+    ll h, w;
+    cin >> h >> w;
+    ll area = h * w;
+    if (h == 1 || w == 1) cout << 1 << endl;
+    else if (area % 2 == 0) cout << area / 2 << endl;
+    else cout << area / 2 + 1 << endl;
 }
