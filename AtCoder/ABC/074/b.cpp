@@ -5,14 +5,11 @@ typedef long long ll;
 
 int main(void)
 {
-    int N, K, x, d;
-    cin >> N >> K;
-    d = 0;
-    for (int i = 0; i < N; i++) {
-        cin >> x;
-        int tmp = min(K-x,x);
-        d += tmp;
-    }
-    d *= 2;
-    cout << d << endl;
+    int n, k;
+    cin >> n >> k;
+    vector<int> loc(n);
+    rep (i, n) cin >> loc[i];
+    int total = 0;
+    rep (i, n) total += min(loc[i], k-loc[i]);
+    cout << total * 2 << endl;
 }
