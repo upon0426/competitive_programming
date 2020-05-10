@@ -7,19 +7,8 @@ int main(void)
 {
     string a, b;
     cin >> a >> b;
-    vector<char> num;
-    rep(i, a.size()) num.push_back(a[i]);
-    rep(i, b.size()) num.push_back(b[i]);
-    vector<int> nums;
+    int number = stoi(a+b);
 
-    rep(i, num.size()) nums.push_back(num[i]-'0');
-
-    int number = 0;
-    rep(i, nums.size()) {
-        number += nums[i];
-        number *= 10;
-    }
-    number /= 10;
     int answer = 0;
     for (int i = 0;i * i<=number;i++) {
         if (i * i == number) answer = 1; 
