@@ -3,37 +3,37 @@
 using namespace std;
 typedef long long ll;
 
-const int INF = 101001001;
-
-int a[12][12];
-
 int main(void)
 {
+    // input
     int n, m, x;
     cin >> n >> m >> x;
-    vector<int> c(n);
-    rep(i, n) {
-        cin >> c[i];
-        rep(j,m) cin >> a[i][j];
+    int a[12][12];
+    vector<int> cost(n);
+    rep (i, n) {
+        cin >> cost[i];
+        rep (j, m) cin >> a[i][j];
     }
-    
-    int ans = INF;
-    // n番目のフラグが立つまで
-    for (int s;s< (1<<n);s++) {
-        int cost = 0;
-        vector<int> d(m);
+
+    // compute
+    vector<int> skill(m);
+    int flag;
+    int minNm = 10000000;
+    int total;
+    rep(s, 1<<n) {
+        flag = 1;
+        total = 0;
+        rep(i, m) skill[i] = 0;
         rep(i, n) {
-            //　ビットsにi番目のフラグがたっているか
-            if (s>>i&1) {
-                cost += c[i];
-                rep(j,m) d[j] += a[i][j];
+            if(s>>i&1) {
+                rep(j, m) skill[j] += a[i][j];
+                total += cost[i];
             }
         }
-        bool ok = true;
-        rep(j,m) if (d[j] < x) ok = false;
-        if (ok) ans = min(ans, cost);
+        rep(i, m) if (skill[i] < x) flag = 0;
+        if (flag == 1) minNm = min(minNm, total);
     }
-    if (ans == INF) cout << -1 << endl;
-    else cout << ans << endl;
-    return 0;
+    if (minNm == 10000000) cout << -1 << endl;
+    else cout << minNm << endl;
+
 }
