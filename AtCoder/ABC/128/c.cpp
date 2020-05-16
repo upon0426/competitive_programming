@@ -18,14 +18,31 @@ int main(void) {
     rep(i, m) cin >> p[i];
 
     // compute
-    int answer = 0;
+    ll answer = 0;
+    int count = 0;
     int ok;
-    rep(a, (1<<n)) {
+    rep(a, 1<<n) {
+        // 全てのon offの組み合わせをつくる
         ok = 1;
+        // 電球毎にチェック
         rep(b, m) {
-            rep (c, k[b]) if (!(c<<n&1)) ok = 0;
+            count = 0;
+            // スイッチの個数チェック
+            rep (c, k[b]) if (a>>s[b][c]&1) {
+                //cout << " " << c << ":" << count << endl;
+                count++;
+            }  
+            if (count%2 != p[b]) ok = 0;
+            //cout << " " << count << " " << p[b] << endl;  
         }
         if (ok) answer++; 
+        // debug
+        if (ok) {
+        cout << a << ":" << ok;
+        rep(b, m) cout << " " << (a>>b&1);
+        cout << endl;
+        }
+        
     }
     cout << answer << endl;
 }
